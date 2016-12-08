@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <setting id="numcams" type="labelenum" label="30020" values="1|2|3" default="1"/>
+    <setting type="separator" />
+    <setting id="cam1" type="text" label="30021" value="" default="" />
+    <setting id="cam2" type="text" label="30022" value="" default="" visible="gt(-3,0)" />
+    <setting id="cam3" type="text" label="30023" value="" default="" visible="gt(-4,1)" />
+</settings>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <string id="30010">Überwachungskameras</string>
+    <string id="30011">Kamera %s</string>
+
+    <!-- Settings -->
+    <string id="30020">Anzahl der Kameras</string>
+    <string id="30021">URL der Kamera 1</string>
+    <string id="30022">URL der Kamera 2</string>
+    <string id="30023">URL der Kamera 3</string>
+</strings>
