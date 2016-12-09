@@ -3,9 +3,15 @@
     <string id="30010">Surveillance Cameras</string>
     <string id="30011">Camera %s</string>
 
+    <!-- Error messages -->
+    <string id="30015">There ar no stream urls defined in settings. Please define at least one url.</string>
+
     <!-- Settings -->
     <string id="30020">Number of Cameras</string>
-    <string id="30021">URL of Camera 1</string>
-    <string id="30022">URL of Camera 2</string>
-    <string id="30023">URL of Camera 3</string>
+    <string id="30021">Stream URL Camera 1</string>
+    <string id="30022">Stream URL Camera 2</string>
+    <string id="30023">Stream URL Camera 3</string>
+    <string id="30025">Location Camera 1</string>
+    <string id="30026">Location Camera 2</string>
+    <string id="30027">Location Camera 3</string>
 </strings>

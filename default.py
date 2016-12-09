@@ -8,14 +8,10 @@ import xbmcplugin
 
 __addon__ = xbmcaddon.Addon()
 __addonID__ = __addon__.getAddonInfo('id')
+__addonname__ = __addon__.getAddonInfo('name')
 __path__ = __addon__.getAddonInfo('path')
 
 __LS__ = __addon__.getLocalizedString
-
-'''
-def build_url(query):
-    return base_url + '?' + urllib.urlencode(query)
-'''
 
 def paramsToDict(parameters):
 
@@ -42,13 +38,24 @@ if len(arguments) > 1:
     params = paramsToDict(arguments[1])
     mode = urllib.unquote_plus(params.get('mode', ''))
 
+    item = [__LS__(30011) % ('1'), __LS__(30011) % ('2'), __LS__(30011) % ('3')]
+    cam  = [__addon__.getSetting('cam1'), __addon__.getSetting('cam2'), __addon__.getSetting('cam3')]
+    loc  = [__addon__.getSetting('loc1'), __addon__.getSetting('loc2'), __addon__.getSetting('loc3')]
+
+
 if mode is '':
+    _atleast = False
     for i in range(int(__addon__.getSetting('numcams'))):
         icon = xbmc.translatePath(os.path.join( __path__,'resources', 'lib', 'media', 'ipcam_%s.png' % (i + 1)))
-        li = xbmcgui.ListItem(__LS__(30011) % (i + 1), iconImage =icon)
+        _listitem = '%s - %s' %(item[i], loc[i]) if loc[i] != '' else item[i]
+        li = xbmcgui.ListItem(_listitem, iconImage =icon)
         li.setProperty('isPlayable', 'true')
-        url = __addon__.getSetting('cam%s' % (i + 1))
-        if url != '':
-            xbmcplugin.addDirectoryItem(_addonHandle, url, li)
 
-xbmcplugin.endOfDirectory(_addonHandle)
+        if cam[i] != '':
+            xbmcplugin.addDirectoryItem(_addonHandle, cam[i], li)
+            _atleast = True
+
+if _atleast:
+    xbmcplugin.endOfDirectory(_addonHandle)
+else:
+    xbmcgui.Dialog().ok(__addonname__, __LS__(30015))
