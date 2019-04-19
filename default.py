@@ -50,6 +50,7 @@ if mode is '':
         _listitem = '%s - %s' %(item[i], loc[i]) if loc[i] != '' else item[i]
         li = xbmcgui.ListItem(_listitem, iconImage =icon)
         li.setProperty('isPlayable', 'true')
+        li.setInfo('video', {'tag': 'Documentary'})
 
         if cam[i] != '':
             xbmcplugin.addDirectoryItem(_addonHandle, cam[i], li)
