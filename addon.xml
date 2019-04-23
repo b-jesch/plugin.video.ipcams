@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.ipcams" name="Surveillance Cameras" version="0.0.3" provider-name="Birger Jesch">
+<addon id="plugin.video.ipcams" name="Surveillance Cameras" version="0.0.4" provider-name="Birger Jesch">
   <requires>
     <import addon="xbmc.python" version="2.25.0"/>
   </requires>
