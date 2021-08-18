@@ -1,31 +1,29 @@
 import sys
 import os
-import urllib
+from urllib.parse import parse_qsl, unquote_plus
 import xbmc
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
+import xbmcvfs
 
 __addon__ = xbmcaddon.Addon()
 __addonID__ = __addon__.getAddonInfo('id')
 __addonname__ = __addon__.getAddonInfo('name')
 __path__ = __addon__.getAddonInfo('path')
+__iconpath__ = os.path.join(xbmcvfs.translatePath(__path__), 'resources', 'lib', 'media')
+__fanart__ = os.path.join(xbmcvfs.translatePath(__path__), 'fanart.jpg')
 
 __LS__ = __addon__.getLocalizedString
 
+
 def paramsToDict(parameters):
+    return dict(parse_qsl(parameters))
 
-    paramDict = {}
-    if parameters:
-        paramPairs = parameters.split("&")
-        for paramsPair in paramPairs:
-            paramSplits = paramsPair.split('=')
-            if (len(paramSplits)) == 2:
-                paramDict[paramSplits[0]] = paramSplits[1]
-    return paramDict
 
-def writeLog(message, level=xbmc.LOGNOTICE):
-    xbmc.log('[%s] %s' % (__addonID__, message.encode('utf-8', errors='ignore')), level)
+def writeLog(message, level=xbmc.LOGDEBUG):
+    xbmc.log('[%s] %s' % (__addonID__, message), level)
+
 
 arguments = sys.argv
 
@@ -36,25 +34,25 @@ if len(arguments) > 1:
         arguments[1] = arguments[1][1:]
 
     params = paramsToDict(arguments[1])
-    mode = urllib.unquote_plus(params.get('mode', ''))
 
-    item = [__LS__(30011) % ('1'), __LS__(30011) % ('2'), __LS__(30011) % ('3')]
-    cam  = [__addon__.getSetting('cam1'), __addon__.getSetting('cam2'), __addon__.getSetting('cam3')]
-    loc  = [__addon__.getSetting('loc1'), __addon__.getSetting('loc2'), __addon__.getSetting('loc3')]
+    item = [__LS__(30011) % '1', __LS__(30011) % '2', __LS__(30011) % '3', __LS__(30011) % '4']
+    cam = [__addon__.getSetting('cam1'), __addon__.getSetting('cam2'), __addon__.getSetting('cam3'),
+           __addon__.getSetting('cam4')]
+    loc = [__addon__.getSetting('loc1'), __addon__.getSetting('loc2'), __addon__.getSetting('loc3'),
+           __addon__.getSetting('loc4')]
 
 
-if mode is '':
-    _atleast = False
-    for i in range(int(__addon__.getSetting('numcams'))):
-        icon = xbmc.translatePath(os.path.join( __path__,'resources', 'lib', 'media', 'ipcam_%s.png' % (i + 1)))
-        _listitem = '%s - %s' %(item[i], loc[i]) if loc[i] != '' else item[i]
-        li = xbmcgui.ListItem(_listitem, iconImage =icon)
-        li.setProperty('isPlayable', 'true')
-        li.setInfo('video', {'tag': 'Documentary'})
+_atleast = False
+for i in range(int(__addon__.getSetting('numcams'))):
+    li = xbmcgui.ListItem(label=loc[i] if loc[i] != '' else item[i], label2=item[i])
+    icon = xbmc.translatePath(os.path.join( __iconpath__, 'ipcam_%s.png' % (i + 1)))
+    li.setArt({'icon': icon, 'fanart': __fanart__})
+    li.setProperty('isPlayable', 'true')
+    li.setInfo('video', {'tag': 'Documentary'})
 
-        if cam[i] != '':
-            xbmcplugin.addDirectoryItem(_addonHandle, cam[i], li)
-            _atleast = True
+    if cam[i] != '':
+        xbmcplugin.addDirectoryItem(_addonHandle, cam[i], li)
+        _atleast = True
 
 if _atleast:
     xbmcplugin.endOfDirectory(_addonHandle)

@@ -1,8 +1,8 @@
 # XBMC Media Center language file
 # Addon Name: Surveillance Cameras
 # Addon id: plugin.video.ipcams
-# Addon version: 0.0.2
-# Addon Provider: brat, BJ1
+# Addon version: 3.0.0+matrix
+# Addon Provider: PvD
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC-Addons\n"
@@ -64,7 +64,9 @@ msgctxt "#30023"
 msgid "Stream URL Camera 3"
 msgstr ""
 
-#empty string with id 30024
+msgctxt "#30024"
+msgid "Stream URL Camera 4"
+msgstr ""
 
 msgctxt "#30025"
 msgid "Location Camera 1"
@@ -76,4 +78,8 @@ msgstr ""
 
 msgctxt "#30027"
 msgid "Location Camera 3"
+msgstr ""
+
+msgctxt "#30028"
+msgid "Location Camera 4"
 msgstr ""
