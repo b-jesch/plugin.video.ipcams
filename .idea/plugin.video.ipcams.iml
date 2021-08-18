@@ -8,7 +8,7 @@
       <sourceFolder url="file://D:/yaXBMC/xbmcstubs-master" isTestSource="false" />
       <excludeFolder url="file://D:/yaXBMC/xbmcstubs-master" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 2.7.12 (/usr/bin/python2.7)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">
