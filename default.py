@@ -1,6 +1,6 @@
 import sys
 import os
-from urllib.parse import parse_qsl, unquote_plus
+from urllib.parse import parse_qsl
 import xbmc
 import xbmcaddon
 import xbmcgui
@@ -20,11 +20,6 @@ __LS__ = __addon__.getLocalizedString
 def paramsToDict(parameters):
     return dict(parse_qsl(parameters))
 
-
-def writeLog(message, level=xbmc.LOGDEBUG):
-    xbmc.log('[%s] %s' % (__addonID__, message), level)
-
-
 arguments = sys.argv
 
 if len(arguments) > 1:
@@ -42,19 +37,19 @@ if len(arguments) > 1:
            __addon__.getSetting('loc4')]
 
 
-_atleast = False
-for i in range(int(__addon__.getSetting('numcams'))):
-    li = xbmcgui.ListItem(label=loc[i] if loc[i] != '' else item[i], label2=item[i])
-    icon = xbmc.translatePath(os.path.join( __iconpath__, 'ipcam_%s.png' % (i + 1)))
-    li.setArt({'icon': icon, 'fanart': __fanart__})
-    li.setProperty('isPlayable', 'true')
-    li.setInfo('video', {'tag': 'Documentary'})
+    for i in range(int(__addon__.getSetting('numcams'))):
+        li = xbmcgui.ListItem(label=loc[i] if loc[i] != '' else item[i], label2=item[i])
+        icon = xbmc.translatePath(os.path.join( __iconpath__, 'ipcam_%s.png' % (i + 1)))
+        li.setArt({'icon': icon, 'fanart': __fanart__})
+        li.setProperty('isPlayable', 'true')
+        li.setInfo('video', {'tag': 'Documentary'})
 
-    if cam[i] != '':
-        xbmcplugin.addDirectoryItem(_addonHandle, cam[i], li)
-        _atleast = True
+        if cam[i] != '':
+            xbmcplugin.addDirectoryItem(_addonHandle, cam[i], li)
+        else:
+            break
 
-if _atleast:
-    xbmcplugin.endOfDirectory(_addonHandle)
-else:
-    xbmcgui.Dialog().ok(__addonname__, __LS__(30015))
+    if i > 0:
+        xbmcplugin.endOfDirectory(_addonHandle)
+    else:
+        xbmcgui.Dialog().ok(__addonname__, __LS__(30015))
