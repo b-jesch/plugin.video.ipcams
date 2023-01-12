@@ -1,7 +1,6 @@
 import sys
 import os
 from urllib.parse import parse_qsl
-import xbmc
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
