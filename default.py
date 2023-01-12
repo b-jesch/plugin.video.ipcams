@@ -39,7 +39,7 @@ if len(arguments) > 1:
 
     for i in range(int(__addon__.getSetting('numcams'))):
         li = xbmcgui.ListItem(label=loc[i] if loc[i] != '' else item[i], label2=item[i])
-        icon = xbmc.translatePath(os.path.join( __iconpath__, 'ipcam_%s.png' % (i + 1)))
+        icon = xbmcvfs.translatePath(os.path.join( __iconpath__, 'ipcam_%s.png' % (i + 1)))
         li.setArt({'icon': icon, 'fanart': __fanart__})
         li.setProperty('isPlayable', 'true')
         li.setInfo('video', {'tag': 'Documentary'})
