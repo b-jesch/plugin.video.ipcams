@@ -36,6 +36,7 @@ if len(arguments) > 1:
            __addon__.getSetting('loc4')]
 
 
+    cams = 0
     for i in range(int(__addon__.getSetting('numcams'))):
         li = xbmcgui.ListItem(label=loc[i] if loc[i] != '' else item[i], label2=item[i])
         icon = xbmcvfs.translatePath(os.path.join( __iconpath__, 'ipcam_%s.png' % (i + 1)))
@@ -45,10 +46,11 @@ if len(arguments) > 1:
 
         if cam[i] != '':
             xbmcplugin.addDirectoryItem(_addonHandle, cam[i], li)
+            cams += 1
         else:
             break
 
-    if i > 0:
+    if cams > 0:
         xbmcplugin.endOfDirectory(_addonHandle)
     else:
         xbmcgui.Dialog().ok(__addonname__, __LS__(30015))
